@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.title }} — ShopMVC{% endblock %}
+
+{% block content %}
+<nav class="breadcrumbs">
+    <a href="{{ url_for('index') }}">Головна</a>
+    <span>/</span>
+    <span>{{ product.title }}</span>
+</nav>
+
+<section class="product-detail">
+    <div class="product-detail__image">
+        <img src="{{ product.image }}" alt="{{ product.title }}">
+    </div>
+
+    <div class="product-detail__info">
+        <p class="product-detail__label">Картка товару</p>
+        <h1 class="product-detail__title">{{ product.title }}</h1>
+
+        <div class="product-detail__rating">
+            <span>★ {{ product.rating }}</span>
+            <span class="muted">/ 5</span>
+        </div>
+
+        <p class="product-detail__price">{{ "%.2f"|format(product.price) }} грн</p>
+
+        <p class="product-detail__description">
+            Це демонстраційна картка товару. Тут можна показати опис,
+            характеристики, наявність на складі або умови доставки.
+        </p>
+
+        <div class="product-detail__actions">
+            <button class="btn btn--primary" type="button">Додати в кошик</button>
+            <a class="btn btn--ghost" href="{{ url_for('index') }}">← Назад до списку</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

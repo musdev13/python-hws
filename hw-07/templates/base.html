@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Інтернет-магазин{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="logo" href="{{ url_for('index') }}">
+                <span class="logo__icon">🛍️</span>
+                <span>ShopMVC</span>
+            </a>
+            <nav class="nav">
+                <a href="{{ url_for('index') }}">Головна</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container page">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2026 ShopMVC. Навчальний Flask-проєкт.</p>
+        </div>
+    </footer>
+</body>
+</html>
