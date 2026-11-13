@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Місто{% endblock %} — Вінниця</title>
+    <link rel="stylesheet" href="{% static 'city/style.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="{% url 'home' %}" class="logo">
+                <span class="logo-mark">В</span>
+                <span class="logo-text">
+                    Вінниця
+                    <small>міський портал</small>
+                </span>
+            </a>
+            <nav class="site-nav">
+                <a href="{% url 'home' %}"{% if active == 'home' %} class="active"{% endif %}>Головна</a>
+                <a href="{% url 'news' %}"{% if active == 'news' %} class="active"{% endif %}>Новини</a>
+                <a href="{% url 'management' %}"{% if active == 'management' %} class="active"{% endif %}>Керівництво</a>
+                <a href="{% url 'facts' %}"{% if active == 'facts' %} class="active"{% endif %}>Факти</a>
+                <a href="{% url 'contacts' %}"{% if active == 'contacts' %} class="active"{% endif %}>Контакти</a>
+                <a href="{% url 'history' %}"{% if active == 'history' %} class="active"{% endif %}>Історія</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="site-main">
+        <div class="container">
+            {% block hero %}{% endblock %}
+            {% block page_header %}
+            <div class="page-header">
+                <h1>{% block heading %}{% endblock %}</h1>
+            </div>
+            {% endblock %}
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            © 2026 Вінниця — міський портал
+        </div>
+    </footer>
+</body>
+</html>

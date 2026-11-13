@@ -1,0 +1,68 @@
+{% extends 'city/base.html' %}
+{% block title %}Головна{% endblock %}
+
+{% block hero %}
+<section class="hero">
+    <span class="hero-badge">Міський портал</span>
+    <h1>Вінниця —<br>місто на Південному Бузі</h1>
+    <p>Обласний центр на Поділлі, одне з найдавніших історичних міст Східного
+Поділля, сучасний економічний, культурний та туристичний центр України.</p>
+    <div class="hero-stats">
+        <span><strong>371 тис.</strong> мешканців</span>
+        <span><strong>1363</strong> рік заснування</span>
+        <span><strong>113 км²</strong> площа</span>
+    </div>
+</section>
+{% endblock %}
+
+{% block page_header %}{% endblock %}
+
+{% block content %}
+<div class="card-grid">
+    <a class="card" href="{% url 'news' %}">
+        <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8V6Z"/></svg>
+        </div>
+        <h3>Новини міста</h3>
+        <p>Актуальні події Вінниці та громади.</p>
+        <span class="card-arrow">Переглянути →</span>
+    </a>
+    <a class="card" href="{% url 'management' %}">
+        <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Керівництво</h3>
+        <p>Міський голова та команда.</p>
+        <span class="card-arrow">Переглянути →</span>
+    </a>
+    <a class="card" href="{% url 'facts' %}">
+        <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        </div>
+        <h3>Факти про місто</h3>
+        <p>Цікаві цифри та особливості.</p>
+        <span class="card-arrow">Переглянути →</span>
+    </a>
+    <a class="card" href="{% url 'contacts' %}">
+        <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <h3>Контакти</h3>
+        <p>Телефони міських служб.</p>
+        <span class="card-arrow">Переглянути →</span>
+    </a>
+</div>
+
+<a class="featured-card" href="{% url 'history' %}">
+    <div class="featured-card-left">
+        <div class="featured-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+            <h3>Історія міста</h3>
+            <p>Багатовікова спадщина Вінниці — від оборонної фортеці до сучасного європейського міста.</p>
+        </div>
+    </div>
+    <span class="featured-arrow">→</span>
+</a>
+{% endblock %}
