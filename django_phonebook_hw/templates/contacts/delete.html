@@ -1,0 +1,22 @@
+{% extends "contacts/base.html" %}
+{% block title %}Видалення — Телефонна книга{% endblock %}
+{% block content %}
+  <a class="back" href="{% url 'contact_list' %}">← До списку</a>
+  <h1>Видалити контакт?</h1>
+
+  <div class="card confirm">
+    <h2>{{ contact }}</h2>
+    <div class="meta">
+      {{ contact.email }} · {{ contact.phone }}
+      {% if contact.notes %}<br>{{ contact.notes }}{% endif %}
+    </div>
+    <p>Цю дію не можна скасувати.</p>
+    <form method="post">
+      {% csrf_token %}
+      <div class="actions">
+        <button class="btn danger" type="submit">Так, видалити</button>
+        <a class="btn ghost" href="{% url 'contact_list' %}">Скасувати</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}

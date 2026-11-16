@@ -1,0 +1,56 @@
+{% extends "contacts/base.html" %}
+{% block title %}Контакти — Телефонна книга{% endblock %}
+{% block content %}
+  <h1>Усі контакти</h1>
+  <p class="lead">Всього контактів: {{ contacts|length }}{% if query %} (за запитом «{{ query }}»){% endif %}.</p>
+
+  <div class="toolbar">
+    <form method="get" action="{% url 'contact_list' %}">
+      <input type="search" name="q" value="{{ query }}" placeholder="Пошук за ім'ям або прізвищем">
+      <button class="btn" type="submit">Знайти</button>
+      {% if query %}
+        <a class="btn ghost" href="{% url 'contact_list' %}">Скинути</a>
+      {% endif %}
+    </form>
+  </div>
+
+  {% if contacts %}
+    <table class="contacts">
+      <thead>
+        <tr>
+          <th>Ім'я</th>
+          <th>Прізвище</th>
+          <th>Email</th>
+          <th>Телефон</th>
+          <th>Примітки</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in contacts %}
+          <tr>
+            <td>{{ c.first_name }}</td>
+            <td>{{ c.last_name }}</td>
+            <td>{{ c.email }}</td>
+            <td>{{ c.phone }}</td>
+            <td class="notes">{{ c.notes|default:"—" }}</td>
+            <td>
+              <div class="row-actions">
+                <a class="btn ghost" href="{% url 'contact_update' c.pk %}">Редагувати</a>
+                <a class="btn danger" href="{% url 'contact_delete' c.pk %}">Видалити</a>
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <div class="card empty">
+      {% if query %}
+        Нічого не знайдено за запитом «{{ query }}».
+      {% else %}
+        Поки що немає жодного контакту. Додайте перший.
+      {% endif %}
+    </div>
+  {% endif %}
+{% endblock %}

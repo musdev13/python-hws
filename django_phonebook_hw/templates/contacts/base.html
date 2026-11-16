@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Телефонна книга{% endblock %}</title>
+<style>
+  :root {
+    --bg: #f4f2ee;
+    --surface: #ffffff;
+    --ink: #1f2933;
+    --muted: #6b7280;
+    --border: #d8d4cc;
+    --accent: #1f6feb;
+    --accent-ink: #ffffff;
+    --danger: #b42318;
+    --danger-bg: #fdeceb;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    min-height: 100vh;
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 0 20px; }
+  header.site { background: var(--surface); border-bottom: 1px solid var(--border); }
+  header.site .container {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px;
+  }
+  header.site a.brand { font-weight: 600; color: var(--ink); text-decoration: none; font-size: 1.05rem; }
+  header.site a.brand:hover { color: var(--accent); }
+  main { padding: 32px 0 48px; }
+  h1 { font-size: 1.6rem; margin: 0 0 8px; }
+  p.lead { color: var(--muted); margin: 0 0 24px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  }
+  .form-row { margin-bottom: 16px; }
+  .form-row label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; }
+  input[type="text"], input[type="email"], input[type="search"], textarea {
+    width: 100%; padding: 10px 12px; font: inherit; color: var(--ink);
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    outline: none; transition: border-color .15s, box-shadow .15s;
+  }
+  input:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(31,111,235,.15); }
+  textarea { resize: vertical; min-height: 80px; }
+  .actions { margin-top: 20px; display: flex; gap: 10px; align-items: center; }
+  button.btn, a.btn {
+    display: inline-block;
+    background: var(--accent); color: var(--accent-ink);
+    border: 0; padding: 10px 18px; border-radius: 8px;
+    font: inherit; font-weight: 600; cursor: pointer; text-decoration: none;
+  }
+  button.btn:hover, a.btn:hover { background: #1858c4; }
+  a.btn.ghost, button.btn.ghost {
+    background: transparent; color: var(--ink); border: 1px solid var(--border);
+  }
+  a.btn.ghost:hover, button.btn.ghost:hover { background: #f0ede6; }
+  a.btn.danger, button.btn.danger { background: var(--danger); }
+  a.btn.danger:hover, button.btn.danger:hover { background: #8f1a12; }
+  .errors {
+    background: var(--danger-bg); color: var(--danger);
+    border: 1px solid #f5c2bf; border-radius: 8px;
+    padding: 10px 14px; margin-bottom: 14px; font-size: 0.95rem;
+  }
+  .errors ul { margin: 6px 0 0; padding-left: 18px; }
+  .toolbar { display: flex; gap: 10px; align-items: center; margin-bottom: 18px; flex-wrap: wrap; }
+  .toolbar form { display: flex; gap: 8px; flex: 1; min-width: 220px; }
+  .toolbar input[type="search"] { flex: 1; }
+  table.contacts { width: 100%; border-collapse: collapse; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  table.contacts th, table.contacts td {
+    padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top;
+  }
+  table.contacts th {
+    background: #faf8f3; font-size: 0.85rem; text-transform: uppercase;
+    letter-spacing: .02em; color: var(--muted); font-weight: 600;
+  }
+  table.contacts tr:last-child td { border-bottom: 0; }
+  table.contacts td.notes { color: var(--muted); font-size: 0.92rem; max-width: 240px; }
+  table.contacts td .row-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .row-actions .btn { padding: 6px 10px; font-size: 0.88rem; }
+  .empty { color: var(--muted); text-align: center; padding: 32px; }
+  .back { display: inline-block; margin-bottom: 16px; color: var(--muted); text-decoration: none; font-size: 0.92rem; }
+  .back:hover { color: var(--ink); }
+  .confirm { text-align: left; }
+  .confirm h2 { margin: 0 0 12px; font-size: 1.15rem; }
+  .confirm p { margin: 0 0 20px; color: var(--ink); }
+  .confirm .meta { color: var(--muted); font-size: 0.92rem; margin-bottom: 20px; }
+</style>
+</head>
+<body>
+  <header class="site">
+    <div class="container">
+      <a class="brand" href="{% url 'contact_list' %}">Телефонна книга</a>
+      <a class="btn" href="{% url 'contact_create' %}">+ Додати контакт</a>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+</body>
+</html>
