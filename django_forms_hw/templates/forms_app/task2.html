@@ -1,0 +1,45 @@
+{% extends "forms_app/base.html" %}
+{% block title %}Калькулятор — Довідник програміста{% endblock %}
+{% block content %}
+  <a class="back" href="{% url 'index' %}">← На головну</a>
+  <h1>Калькулятор трьох чисел</h1>
+  <p class="lead">Введіть три числа та виберіть, що потрібно обчислити.</p>
+
+  <div class="card">
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <div class="errors">{{ form.non_field_errors }}</div>
+      {% endif %}
+      {% for field in form %}
+        {% if field.name == 'operation' %}
+          <div class="form-row">
+            <label>{{ field.label }}</label>
+            <div class="choices">
+              {% for radio in field %}
+                <label>{{ radio.tag }} {{ radio.choice_label }}</label>
+              {% endfor %}
+            </div>
+            {% if field.errors %}<div class="errors">{{ field.errors }}</div>{% endif %}
+          </div>
+        {% else %}
+          <div class="form-row">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}<div class="errors">{{ field.errors }}</div>{% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+      <div class="actions">
+        <button class="btn" type="submit">Обчислити</button>
+      </div>
+    </form>
+  </div>
+
+  {% if result %}
+    <div class="result">
+      <h3>Результат</h3>
+      <p style="margin:0">{{ result }}</p>
+    </div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "forms_app/base.html" %}
+{% block title %}Реєстрація — Довідник програміста{% endblock %}
+{% block content %}
+  <a class="back" href="{% url 'index' %}">← На головну</a>
+  <h1>Реєстрація в інтернет-магазині</h1>
+  <p class="lead">Заповніть дані — ми покажемо їх у відформатованому вигляді.</p>
+
+  <div class="card">
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <div class="errors">{{ form.non_field_errors }}</div>
+      {% endif %}
+      {% for field in form %}
+        {% if field.name == 'gender' %}
+          <div class="form-row">
+            <label>{{ field.label }}</label>
+            <div class="choices">
+              {% for radio in field %}
+                <label>{{ radio.tag }} {{ radio.choice_label }}</label>
+              {% endfor %}
+            </div>
+            {% if field.errors %}<div class="errors">{{ field.errors }}</div>{% endif %}
+          </div>
+        {% elif field.name == 'newsletter' %}
+          <div class="form-row checkbox-row">
+            <label>{{ field }} {{ field.label }}</label>
+            {% if field.errors %}<div class="errors">{{ field.errors }}</div>{% endif %}
+          </div>
+        {% else %}
+          <div class="form-row">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}<div class="errors">{{ field.errors }}</div>{% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+      <div class="actions">
+        <button class="btn" type="submit">Зареєструватися</button>
+      </div>
+    </form>
+  </div>
+
+  {% if result %}
+    <div class="result">
+      <h3>Ваші дані</h3>
+      <dl>
+        {% for key, value in result.items %}
+          <dt>{{ key }}</dt><dd>{{ value }}</dd>
+        {% endfor %}
+      </dl>
+    </div>
+  {% endif %}
+{% endblock %}

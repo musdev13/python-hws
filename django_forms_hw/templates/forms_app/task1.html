@@ -1,0 +1,33 @@
+{% extends "forms_app/base.html" %}
+{% block title %}Вхід — Довідник програміста{% endblock %}
+{% block content %}
+  <a class="back" href="{% url 'index' %}">← На головну</a>
+  <h1>Вхід на сайт</h1>
+  <p class="lead">Введіть логін і пароль. Система визначить ваш рівень доступу.</p>
+
+  <div class="card">
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <div class="errors">{{ form.non_field_errors }}</div>
+      {% endif %}
+      {% for field in form %}
+        <div class="form-row">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}<div class="errors">{{ field.errors }}</div>{% endif %}
+        </div>
+      {% endfor %}
+      <div class="actions">
+        <button class="btn" type="submit">Увійти</button>
+      </div>
+    </form>
+  </div>
+
+  {% if result %}
+    <div class="result{% if is_error %} is-error{% endif %}">
+      <h3>Результат</h3>
+      <p style="margin:0">{{ result }}</p>
+    </div>
+  {% endif %}
+{% endblock %}

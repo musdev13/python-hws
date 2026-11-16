@@ -1,0 +1,24 @@
+{% extends "forms_app/base.html" %}
+{% block title %}Головна — Довідник програміста{% endblock %}
+{% block content %}
+  <h1>Довідник програміста</h1>
+  <p class="lead">Чотири невеликі інструменти в одному місці. Виберіть розділ.</p>
+  <div class="menu">
+    <a class="tile" href="{% url 'task1' %}">
+      <div class="tile-title">Вхід на сайт</div>
+      <div class="tile-desc">Введіть логін і пароль — покажемо ваш рівень доступу.</div>
+    </a>
+    <a class="tile" href="{% url 'task2' %}">
+      <div class="tile-title">Калькулятор трьох чисел</div>
+      <div class="tile-desc">Мінімум, максимум або середнє арифметичне.</div>
+    </a>
+    <a class="tile" href="{% url 'task3' %}">
+      <div class="tile-title">Реєстрація в інтернет-магазині</div>
+      <div class="tile-desc">Заповніть дані для доставки та підписки на новини.</div>
+    </a>
+    <a class="tile" href="{% url 'task4' %}">
+      <div class="tile-title">День програміста</div>
+      <div class="tile-desc">Введіть рік — покажемо дату 256-го дня.</div>
+    </a>
+  </div>
+{% endblock %}
