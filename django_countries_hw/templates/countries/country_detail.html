@@ -1,0 +1,20 @@
+{% extends 'countries/base.html' %}
+{% block title %}{{ country.name|default:"Країна" }}{% endblock %}
+{% block content %}
+<a class="back" href="{% url 'countries' %}">← До всіх країн</a>
+{% if error %}<p class="error">{{ error }}</p>{% endif %}
+{% if country %}
+<h1>{{ country.emoji }} {{ country.name }}</h1>
+<div class="card">
+  <dl class="meta">
+    <dt>Код країни</dt><dd>{{ country.code }}</dd>
+    <dt>Офіційна назва</dt><dd>{{ country.native }}</dd>
+    <dt>Столиця</dt><dd><a href="{% url 'capital_detail' country.code %}">{{ country.capital|default:"Немає даних" }}</a></dd>
+    <dt>Регіон</dt><dd>{{ country.continent.name }}</dd>
+    <dt>Валюта</dt><dd>{{ country.currency|default:"Немає даних" }}</dd>
+    <dt>Мови</dt>
+    <dd>{% for language in country.languages %}{{ language.name }}{% if not forloop.last %}, {% endif %}{% empty %}Немає даних{% endfor %}</dd>
+  </dl>
+</div>
+{% endif %}
+{% endblock %}

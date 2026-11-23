@@ -1,0 +1,25 @@
+{% extends 'countries/base.html' %}
+{% block title %}Країни за мовою{% endblock %}
+{% block content %}
+<h1>Країни за мовою</h1>
+{% if error %}<p class="error">{{ error }}</p>{% endif %}
+<form method="get">
+  <label for="language">Оберіть мову:</label>
+  <select id="language" name="code" onchange="this.form.submit()">
+    <option value="">-- Мова --</option>
+    {% for language in languages %}
+      <option value="{{ language.code }}" {% if selected.code == language.code %}selected{% endif %}>{{ language.name }}</option>
+    {% endfor %}
+  </select>
+</form>
+{% if selected %}
+  <h2>{{ selected.name }}</h2>
+  <ul class="grid">
+    {% for country in countries %}
+      <li><a href="{% url 'country_detail' country.code %}">{{ country.emoji }} {{ country.name }}</a></li>
+    {% empty %}
+      <li>Країн не знайдено.</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+{% endblock %}

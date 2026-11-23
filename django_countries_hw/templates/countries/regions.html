@@ -1,0 +1,11 @@
+{% extends 'countries/base.html' %}
+{% block title %}Регіони{% endblock %}
+{% block content %}
+<h1>Регіони світу</h1>
+{% if error %}<p class="error">{{ error }}</p>{% endif %}
+<ul class="grid">
+  {% for region in regions %}
+    <li><a href="{% url 'region_detail' region.code %}">{{ region.name }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}

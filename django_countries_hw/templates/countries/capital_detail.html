@@ -1,0 +1,17 @@
+{% extends 'countries/base.html' %}
+{% block title %}Столиця{% endblock %}
+{% block content %}
+{% if error %}<p class="error">{{ error }}</p>{% endif %}
+{% if country %}
+<a class="back" href="{% url 'country_detail' country.code %}">← До країни {{ country.name }}</a>
+<h1>{{ country.emoji }} {{ country.capital|default:"Столиця невідома" }}</h1>
+<div class="card">
+  <dl class="meta">
+    <dt>Назва столиці</dt><dd>{{ country.capital|default:"Немає даних" }}</dd>
+    <dt>Країна</dt><dd>{{ country.name }}</dd>
+    <dt>Код країни</dt><dd>{{ country.code }}</dd>
+    <dt>Регіон</dt><dd>{{ country.continent.name }}</dd>
+  </dl>
+</div>
+{% endif %}
+{% endblock %}

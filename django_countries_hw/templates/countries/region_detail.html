@@ -1,0 +1,14 @@
+{% extends 'countries/base.html' %}
+{% block title %}{{ region.name|default:"Регіон" }}{% endblock %}
+{% block content %}
+<a class="back" href="{% url 'regions' %}">← До всіх регіонів</a>
+{% if error %}<p class="error">{{ error }}</p>{% endif %}
+{% if region %}
+<h1>{{ region.name }}</h1>
+<ul class="grid">
+  {% for country in region.countries %}
+    <li><a href="{% url 'country_detail' country.code %}">{{ country.emoji }} {{ country.name }}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

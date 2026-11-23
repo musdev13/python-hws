@@ -1,0 +1,11 @@
+{% extends 'countries/base.html' %}
+{% block title %}Країни{% endblock %}
+{% block content %}
+<h1>Країни світу</h1>
+{% if error %}<p class="error">{{ error }}</p>{% endif %}
+<ul class="grid">
+  {% for country in countries %}
+    <li><a href="{% url 'country_detail' country.code %}">{{ country.emoji }} {{ country.name }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}
