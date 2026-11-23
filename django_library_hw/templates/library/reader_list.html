@@ -1,0 +1,14 @@
+{% extends 'library/base.html' %}
+{% block title %}Читачі — Бібліотека{% endblock %}
+{% block content %}
+<h1>Читачі</h1>
+{% for reader in readers %}
+  <section class="card">
+    <h2><a href="{% url 'reader_detail' reader.pk %}">{{ reader.last_name }} {{ reader.first_name }}</a></h2>
+    <div>{{ reader.phone }} · {{ reader.email }}</div>
+    <div class="muted">У бібліотеці з {{ reader.joined_at }}</div>
+  </section>
+{% empty %}
+  <p class="empty">Читачів поки немає.</p>
+{% endfor %}
+{% endblock %}

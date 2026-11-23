@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Бібліотека{% endblock %}</title>
+  <style>
+    :root { --ink:#202a35; --muted:#667085; --line:#dce2e8; --blue:#2457a6; --bg:#f4f6f8; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:var(--bg); font:16px/1.5 Arial,sans-serif; }
+    header { background:#fff; border-bottom:1px solid var(--line); }
+    nav { max-width:1000px; margin:auto; padding:14px 20px; display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+    nav a { color:var(--blue); text-decoration:none; }
+    nav .brand { margin-right:auto; font-weight:bold; font-size:1.1rem; }
+    nav form { margin:0; }
+    nav button { border:0; background:none; color:var(--blue); font:inherit; cursor:pointer; padding:0; }
+    main { max-width:1000px; margin:auto; padding:30px 20px 50px; }
+    h1 { margin:0 0 20px; }
+    .card { background:#fff; border:1px solid var(--line); border-radius:9px; padding:18px; margin:12px 0; }
+    .card h2 { margin:0 0 8px; font-size:1.15rem; }
+    a { color:var(--blue); }
+    .filters { display:flex; gap:12px; margin-bottom:18px; }
+    .filters a { padding:8px 12px; background:white; border:1px solid var(--line); border-radius:6px; text-decoration:none; }
+    .filters a.active { color:white; background:var(--blue); border-color:var(--blue); }
+    .muted { color:var(--muted); }
+    dl { display:grid; grid-template-columns:180px 1fr; gap:8px 14px; }
+    dt { color:var(--muted); } dd { margin:0; }
+    .empty { color:var(--muted); }
+    .login { max-width:440px; }
+    .login label { display:block; margin:12px 0 4px; }
+    .login input { width:100%; padding:9px; border:1px solid var(--line); border-radius:5px; }
+    .login button { margin-top:16px; padding:9px 16px; border:0; border-radius:5px; color:white; background:var(--blue); cursor:pointer; }
+    @media (max-width:560px) { dl { grid-template-columns:1fr; gap:2px; } dd { margin-bottom:10px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a class="brand" href="{% url 'books' %}">Бібліотека</a>
+      {% if user.is_authenticated %}
+        {% if perms.library.view_book %}<a href="{% url 'books' %}">Книги</a>{% endif %}
+        {% if perms.library.view_reader %}<a href="{% url 'readers' %}">Читачі</a>{% endif %}
+        <span>{{ user.get_username }}</span>
+        <form method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button type="submit">Вийти</button>
+        </form>
+      {% else %}
+        <a href="{% url 'login' %}">Увійти</a>
+      {% endif %}
+    </nav>
+  </header>
+  <main>{% block content %}{% endblock %}</main>
+</body>
+</html>

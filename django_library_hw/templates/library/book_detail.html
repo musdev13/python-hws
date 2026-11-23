@@ -1,0 +1,16 @@
+{% extends 'library/base.html' %}
+{% block title %}{{ book.title }} — Бібліотека{% endblock %}
+{% block content %}
+<h1>{{ book.title }}</h1>
+<section class="card">
+  <dl>
+    <dt>Автор</dt><dd>{{ book.author }}</dd>
+    <dt>Рік видання</dt><dd>{{ book.publication_year }}</dd>
+    <dt>Стиль</dt><dd>{{ book.genre }}</dd>
+    <dt>Видавництво</dt><dd>{{ book.publisher }}</dd>
+    <dt>Наявність</dt>
+    <dd>{% if book.has_active_loan %}Зараз у читача{% else %}У наявності{% endif %}</dd>
+  </dl>
+</section>
+<a href="{% url 'books' %}">← До списку книг</a>
+{% endblock %}

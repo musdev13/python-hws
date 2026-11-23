@@ -1,0 +1,19 @@
+{% extends 'library/base.html' %}
+{% block title %}Книги — Бібліотека{% endblock %}
+{% block content %}
+<h1>Книги</h1>
+<div class="filters">
+  <a href="{% url 'books' %}" class="{% if availability != 'available' %}active{% endif %}">Усі книги</a>
+  <a href="{% url 'books' %}?availability=available" class="{% if availability == 'available' %}active{% endif %}">У наявності</a>
+</div>
+{% for book in books %}
+  <section class="card">
+    <h2><a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a></h2>
+    <div>{{ book.author }} · {{ book.publication_year }} · {{ book.genre }}</div>
+    <div class="muted">Видавництво: {{ book.publisher }}</div>
+    <div>{% if book.has_active_loan %}Зараз у читача{% else %}У наявності{% endif %}</div>
+  </section>
+{% empty %}
+  <p class="empty">Книг не знайдено.</p>
+{% endfor %}
+{% endblock %}

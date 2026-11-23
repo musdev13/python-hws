@@ -1,0 +1,15 @@
+{% extends 'library/base.html' %}
+{% block title %}Вхід — Бібліотека{% endblock %}
+{% block content %}
+<h1>Вхід до бібліотеки</h1>
+<form class="card login" method="post">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+  <label for="{{ form.username.id_for_label }}">Ім’я користувача</label>
+  {{ form.username }}
+  <label for="{{ form.password.id_for_label }}">Пароль</label>
+  {{ form.password }}
+  <input type="hidden" name="next" value="{{ next }}">
+  <button type="submit">Увійти</button>
+</form>
+{% endblock %}

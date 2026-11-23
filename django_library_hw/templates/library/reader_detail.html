@@ -1,0 +1,23 @@
+{% extends 'library/base.html' %}
+{% block title %}{{ reader }} — Бібліотека{% endblock %}
+{% block content %}
+<h1>{{ reader.first_name }} {{ reader.last_name }}</h1>
+<section class="card">
+  <dl>
+    <dt>Телефон</dt><dd>{{ reader.phone }}</dd>
+    <dt>Email</dt><dd>{{ reader.email }}</dd>
+    <dt>Дата запису</dt><dd>{{ reader.joined_at }}</dd>
+  </dl>
+</section>
+<h2>Книги читача</h2>
+{% for loan in reader.loans.all %}
+  <section class="card">
+    <h3><a href="{% url 'book_detail' loan.book.pk %}">{{ loan.book.title }}</a></h3>
+    <div>{{ loan.book.author }} · видана {{ loan.borrowed_at }}</div>
+    <div>{% if loan.returned_at %}Повернена {{ loan.returned_at }}{% else %}Ще не повернена{% endif %}</div>
+  </section>
+{% empty %}
+  <p class="empty">Читач ще не брав книги.</p>
+{% endfor %}
+<a href="{% url 'readers' %}">← До списку читачів</a>
+{% endblock %}
